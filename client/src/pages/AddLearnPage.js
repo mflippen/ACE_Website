@@ -6,21 +6,26 @@ import "./AdminDashboard/AddOfficersPage.css";
 import "./LearnPage.css";
 import { NavItem } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "../api/index.js"
 
-const db = firebase.firestore();
+//const db = firebase.firestore();
 
 function AddLearnPage() {
-  const [videos, setVideos] = React.useState([]);
-  const [users, setUsers] = React.useState([]);
+  //const [videos, setVideos] = React.useState([]);
+  //const [users, setUsers] = React.useState([]);
 
-  React.useEffect( () => {
+  /*React.useEffect( () => {
       const db = firebase.firestore();
       return db.collection('videos').onSnapshot((snapshot) => {
         const videosData = [];
         snapshot.forEach(doc => videosData.push({ ...doc.data(), id: doc.id }));
         setVideos(videosData);
       });
-  }, []);
+  }, []);*/
+
+  const videos = getVideos();
+  const users = getPeople();
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const title = e.target.title.value;
@@ -40,7 +45,9 @@ function AddLearnPage() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const videosCollection = await db.collection("videos").get();
+      //Replaced this line with const videosCollection = getVideos();
+      //const videosCollection = await db.collection("videos").get();
+      const videosCollection = getVideos();
       setUsers(
         videosCollection.docs.map((doc) => {
           return doc.data();

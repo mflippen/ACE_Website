@@ -10,7 +10,7 @@ export const VideoInput = ({video}) => {
 
 
     const onUpdate = () => {
-        const db = firebase.firestore();
+        //const db = firebase.firestore();
         db.collection("videos").doc(video.id).set({
             title: title,
             description: description,

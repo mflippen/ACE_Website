@@ -1,4 +1,5 @@
 import React from "react";
+import { createPerson, updatePersonbyID } from "../api";
 import firebase from "./firebase";
 import "./OfficerInput.css"
 
@@ -13,15 +14,17 @@ export const OfficerInput = ({officer}) => {
     const onUpdate = () => {
         console.log(fileUrl);
         if (fileUrl != null){
-            const db = firebase.firestore();
+            //const db = firebase.firestore();
             // need way to store previous name
-            db.collection("officers").doc(officer.id).set({
+            /*db.collection("officers").doc(officer.id).set({
                 name: name,
                 role: role,
                 email: email,
                 linkedin: linkedin,
                 avatar: fileUrl,
-            });
+            });*/
+
+            updatePersonbyID(officer);
         }
         else{
             console.log("fileURL == null")
@@ -50,8 +53,9 @@ export const OfficerInput = ({officer}) => {
     }
 
     const onDelete = () => {
-        const db = firebase.firestore();
-        db.collection('officers').doc(officer.id).delete();
+        //const db = firebase.firestore();
+        //db.collection('officers').doc(officer.id).delete();
+        
     }
     // for file upload
     const onFileChange = async (e) =>{

@@ -1,10 +1,11 @@
 import React from "react";
 import VideoThumbnail from "../features/VideoThumbnail";
 import "./LearnPage.css";
+import { getVideos } from "../api/index.js";
 import firebase from "./firebase";
 
 function LearnPage() {
-  const [videos, setVideos] = React.useState([]);
+  /*const [videos, setVideos] = React.useState([]);
 
   React.useEffect( () => {
     const db = firebase.firestore();
@@ -13,7 +14,9 @@ function LearnPage() {
       snapshot.forEach(doc => videosData.push({ ...doc.data(), id: doc.id }));
       setVideos(videosData);
     });
-}, []);
+}, []);*/
+
+  const videos = getVideos();
 
   return (
     <div className="LearnPage">
@@ -22,7 +25,8 @@ function LearnPage() {
           <div key = {video.id}>
             <div className = "videos">
             <VideoThumbnail 
-                embedId = {video.videoID} 
+                //Changed embedID from videoID to link
+                embedId = {video.link} 
                 title = {video.title}  
                 description = {video.description}
                 tags= {video.tag}/>
